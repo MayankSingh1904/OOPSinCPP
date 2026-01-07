@@ -1,84 +1,49 @@
 #include <iostream>
 using namespace std;
-// Base class
-class Person {
-public:
-    string name;
-    Person(string n) : name(n) {
-        cout << "Person constructor called" << endl;
-    }
-    void showName() {
-        cout << "Name: " << name << endl;
-    }
-};
-// ==========================
-// MULTI-LEVEL INHERITANCE
-// Person -> Student -> CollegeStudent
-// ==========================
-class Student : public Person {
-public:
-    int rollNo;
-    Student(string n, int r) : Person(n), rollNo(r) {
-        cout << "Student constructor called" << endl;
-    }
 
-    void showRoll() {
-        cout << "Roll No: " << rollNo << endl;
-    }
-};
-class CollegeStudent : public Student {
+// Base class (Level 1)
+class Vehicle {
 public:
-    string collegeName;
-    CollegeStudent(string n, int r, string c) : Student(n, r), collegeName(c) {
-        cout << "CollegeStudent constructor called" << endl;
-    }
-    void showCollege() {
-        cout << "College: " << collegeName << endl;
+    int wheels = 4;
+
+    void showWheels() {
+        cout << "Wheels: " << wheels << endl;
     }
 };
-// ==========================
-// MULTIPLE INHERITANCE
-// Teacher + Athlete -> Coach
-// ==========================
-class Teacher {
+
+// Derived class (Level 2)
+class Car : public Vehicle {
 public:
-    string subject;
-    Teacher(string s) : subject(s) {
-        cout << "Teacher constructor called" << endl;
-    }
-    void showSubject() {
-        cout << "Subject: " << subject << endl;
+    int speed = 120;
+
+    void showSpeed() {
+        cout << "Speed: " << speed << " km/h" << endl;
     }
 };
-class Athlete {
+
+// Derived class (Level 3)
+class SportsCar : public Car {
 public:
-    string sport;
-    Athlete(string sp) : sport(sp) {
-        cout << "Athlete constructor called" << endl;
-    }
-    void showSport() {
-        cout << "Sport: " << sport << endl;
+    string mode = "Sport";
+
+    void showMode() {
+        cout << "Driving mode: " << mode << endl;
     }
 };
-// Multiple inheritance
-class Coach : public Teacher, public Athlete {
-public:
-    Coach(string s, string sp) : Teacher(s), Athlete(sp) {
-        cout << "Coach constructor called" << endl;
-    }
-    void showAll() {
-        showSubject();
-        showSport();
-    }
-};
+
 int main() {
-    cout << "=== Multi-Level Inheritance ===" << endl;
-    CollegeStudent cs("Tony", 101, "MIT");
-    cs.showName();
-    cs.showRoll();
-    cs.showCollege();
-    cout << "\n=== Multiple Inheritance ===" << endl;
-    Coach c("Math", "Football");
-    c.showAll();
+    // Object of most derived class
+    SportsCar sc;
+
+    // Accessing variables from all levels
+    cout << sc.wheels << endl;   // Vehicle
+    cout << sc.speed << endl;    // Car
+    cout << sc.mode << endl;     // SportsCar
+
+    // Accessing methods from all levels
+    sc.showWheels();   // Vehicle
+    sc.showSpeed();    // Car
+    sc.showMode();     // SportsCar
+
     return 0;
 }
