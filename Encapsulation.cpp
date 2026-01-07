@@ -1,39 +1,43 @@
-//encapsulation is basically binding class data members to class methods withing one class.
 #include <iostream>
-#include <string>
 using namespace std;
-
 class Student {
 private:
     int id;
     string name;
-    float marks;
-
 public:
-    // Constructor with parameters using `this` to resolve shadowing
-    Student(int id, string name, float marks) {
-        this->id = id;       // this-> distinguishes object member from parameter
+    // Constructor
+    Student(int id, string name) {
+        this->id = id;
         this->name = name;
-        this->marks = marks;
     }
-
-    // Display method
-    void display() {
-        cout << "ID: " << id 
-             << ", Name: " << name 
-             << ", Marks: " << marks << endl;
+    // Getter for id
+    int getId() {
+        return id;
+    }
+    // Setter for id
+    void setId(int id) {
+        this->id = id;
+    }
+    // Getter for name
+    string getName() {
+        return name;
+    }
+    // Setter for name
+    void setName(string name) {
+        this->name = name;
     }
 };
-
 int main() {
-    // Create object
-    Student s1(101, "Tony", 95.5);
-
-    s1.display();
-
-    // Another object
-    Student s2(202, "Gigachu", 88.0);
-    s2.display();
-
+    // Object creation
+    Student s1(1, "Tony");
+    // Using getters
+    cout << "ID: " << s1.getId() << endl;
+    cout << "Name: " << s1.getName() << endl;
+    // Using setters
+    s1.setId(2);
+    s1.setName("Jarvis");
+    cout << "\nAfter update:" << endl;
+    cout << "ID: " << s1.getId() << endl;
+    cout << "Name: " << s1.getName() << endl;
     return 0;
 }
